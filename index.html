@@ -9,18 +9,31 @@
     </head>
 
   <body>
-    <h1>Let's plot random numbers</h1>
-    <div id="plot"></div>
-    <py-script output="plot">
-      import matplotlib.pyplot as plt
-      import numpy as np
+    <h1>DOM manipulation using PyScript</h1>
+    <h2>String Length Counter</h2>
+    <br>
+    <textarea name="input_text" id="input_text" placeholder="enter your text"></textarea>
+    <button id="run" type="button" class="button is-primary" pys-onClick="count">Count</button>
+    <button id="clear" type="button" class="button is-danger" pys-onClick="clear">Clear</button>
 
-      x = np.random.randn(1000)
-      y = np.random.randn(1000)
-
-      fig, ax = plt.subplots()
-      ax.scatter(x, y)
-      fig
-    </py-script>
+    <p id = 'output'></p>
+    
   </body>
+
+  <py-script>
+
+  input_text = Element("input_text")    
+
+  op = Element("output")
+
+  def clear(*args, **kwargs):
+      input_text.clear()
+
+  def count(*args, **kwargs):
+      number = len(input_text.value)
+      op.write(number)
+
+
+  </py-script>
+
 </html>
