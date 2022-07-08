@@ -1,34 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-    <title>REPL</title>
-
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-    <py-env>
+<html>
+    <head>
+      <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+      <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+      <py-env>
         - numpy
-        - pandas
-    </py-env>
-  </head>
+        - matplotlib
+        - paths:
+          - ./data.py
+      </py-env>
+    </head>
 
   <body>
-    Hello world! <br>
-    This is the current date and time, as computed by Python:
-    <py-script>
-from datetime import datetime
-import pandas as pd
-import numpy as np
+    <h1>Let's plot random numbers</h1>
+    <div id="plot"></div>
+    <py-script output="plot">
+      import matplotlib.pyplot as plt
+      from data import make_x_and_y
 
-now = datetime.now()
-now.strftime("%m/%d/%Y, %H:%M:%S")
-data = pd.DataFrame(columns=['ID', 'Name', 'Surname', 'Age'])
-print(data)
+      x, y = make_x_and_y(n=1000)
 
-print('Hello World!')
+      fig, ax = plt.subplots()
+      ax.scatter(x, y)
+      fig
     </py-script>
   </body>
 </html>
